@@ -215,6 +215,10 @@ export default function DreamPage() {
                   className="rounded-2xl h-96"
                   width={475}
                   height={475}
+                  onError={(e: any) => {
+                    console.error("Error loading image:", e);
+                    setError("Error loading image. Please try again.");
+                  }}
                 />
               )}
               {restoredImage && originalPhoto && !sideBySide && (
@@ -227,6 +231,10 @@ export default function DreamPage() {
                       className="rounded-2xl relative w-full h-96"
                       width={475}
                       height={475}
+                      onError={(e: any) => {
+                        console.error("Error loading original image:", e);
+                        setError("Error loading original image. Please try again.");
+                      }}
                     />
                   </div>
                   <div className="sm:mt-0 mt-8">
@@ -239,6 +247,10 @@ export default function DreamPage() {
                         width={475}
                         height={475}
                         onLoadingComplete={() => setRestoredLoaded(true)}
+                        onError={(e: any) => {
+                          console.error("Error loading generated image:", e);
+                          setError("Error loading generated image. Please try again.");
+                        }}
                       />
                     </a>
                   </div>
