@@ -130,8 +130,10 @@ export default function HomePage() {
                   width={400}
                   height={400}
                   priority={true}
+                  loading="eager"
                   onError={(e: any) => {
                     console.error("Error loading original example image:", e);
+                    e.currentTarget.src = "/generated-pic.png";
                   }}
                 />
               </div>
@@ -144,8 +146,10 @@ export default function HomePage() {
                   src="/generated-pic-2.jpg"
                   className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
                   priority={true}
+                  loading="eager"
                   onError={(e: any) => {
                     console.error("Error loading generated example image:", e);
+                    e.currentTarget.src = "/generatedpic.png";
                   }}
                 />
               </div>
@@ -162,6 +166,11 @@ export default function HomePage() {
                   className="w-full object-cover h-96 rounded-2xl"
                   width={400}
                   height={400}
+                  loading="eager"
+                  onError={(e: any) => {
+                    console.error("Error loading room 2 original image:", e);
+                    e.currentTarget.src = "/original-pic.jpg";
+                  }}
                 />
               </div>
               <div className="sm:mt-0 mt-8">
@@ -172,6 +181,11 @@ export default function HomePage() {
                   height={400}
                   src="/room-2/istockphoto-822550582-612x612-new.jpg"
                   className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
+                  loading="eager"
+                  onError={(e: any) => {
+                    console.error("Error loading room 2 generated image:", e);
+                    e.currentTarget.src = "/generated-pic-2.jpg";
+                  }}
                 />
               </div>
             </div>
