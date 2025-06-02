@@ -120,119 +120,84 @@ export default function HomePage() {
         <div className="mt-20 md:mt-32">
           <h2 className="text-4xl font-bold text-gray-300 mb-12">See It In Action</h2>
           <div className="flex flex-col space-y-10 mt-4 mb-16">
-            {/* First Example */}
             <div className="flex sm:space-x-8 sm:flex-row flex-col">
               <div>
                 <h3 className="mb-1 font-medium text-lg">Original Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Original photo of a room"
-                    src="/original-pic.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Original photo of a room with roomGPT.io"
+                  src="/original-pic.jpg"
+                  className="w-full object-cover h-96 rounded-2xl"
+                  width={400}
+                  height={400}
+                  priority={true}
+                  onError={(e: any) => {
+                    console.error("Error loading original example image:", e);
+                  }}
+                />
               </div>
               <div className="sm:mt-0 mt-8">
                 <h3 className="mb-1 font-medium text-lg">Generated Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Generated photo of a room"
-                    src="/generated-pic-2.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Generated photo of a room with roomGPT.io"
+                  width={400}
+                  height={400}
+                  src="/generated-pic-2.jpg"
+                  className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
+                  priority={true}
+                  onError={(e: any) => {
+                    console.error("Error loading generated example image:", e);
+                  }}
+                />
               </div>
             </div>
             <div className="text-gray-400 text-sm mt-2">
               ↑ Example of a room transformed into a minimalist style
             </div>
-
-            {/* Second Example */}
             <div className="flex sm:space-x-8 sm:flex-row flex-col">
               <div>
                 <h3 className="mb-1 font-medium text-lg">Original Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Original photo of a room"
-                    src="/room-1/original.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Original photo of a room"
+                  src="/room-2/istockphoto-822550582-612x612.jpg"
+                  className="w-full object-cover h-96 rounded-2xl"
+                  width={400}
+                  height={400}
+                />
               </div>
               <div className="sm:mt-0 mt-8">
                 <h3 className="mb-1 font-medium text-lg">Generated Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Generated photo of a room"
-                    src="/room-1/generated.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Generated photo of a room"
+                  width={400}
+                  height={400}
+                  src="/room-2/istockphoto-822550582-612x612-new.jpg"
+                  className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
+                />
               </div>
             </div>
             <div className="text-gray-400 text-sm mt-2">
               ↑ Example of a room transformed into a luxury style
             </div>
-
-            {/* Third Example */}
             <div className="flex sm:space-x-8 sm:flex-row flex-col">
               <div>
                 <h3 className="mb-1 font-medium text-lg">Original Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Original photo of a room"
-                    src="/room-3/original.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Original photo of a room"
+                  src="/room-3/stock-photo-empty-space.jpeg"
+                  className="w-full object-cover h-96 rounded-2xl"
+                  width={400}
+                  height={400}
+                />
               </div>
               <div className="sm:mt-0 mt-8">
                 <h3 className="mb-1 font-medium text-lg">Generated Room</h3>
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-                  <Image
-                    alt="Generated photo of a room"
-                    src="/room-3/generated.jpg"
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-room.jpg";
-                    }}
-                  />
-                </div>
+                <Image
+                  alt="Generated photo of a room"
+                  width={400}
+                  height={400}
+                  src="/room-3/stock-photo-empty-space-new.jpeg"
+                  className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
+                />
               </div>
             </div>
             <div className="text-gray-400 text-sm mt-2">
