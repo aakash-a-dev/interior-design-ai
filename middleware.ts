@@ -6,7 +6,8 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Define public paths that don't require authentication
-  const isPublicPath = path === "/auth/signin" || 
+  const isPublicPath = path === "/" || 
+                      path === "/auth/signin" || 
                       path.startsWith("/api/auth") || 
                       path.startsWith("/_next") || 
                       path === "/favicon.ico";
@@ -16,12 +17,17 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET
   });
 
+  // Redirect to sign in page if accessing protected route without token
   if (!token && !isPublicPath) {
-    return NextResponse.redirect(new URL("/auth/signin", request.url));
+    const url = new URL("/auth/signin", request.url);
+    url.searchParams.set("callbackUrl", path);
+    return NextResponse.redirect(url);
   }
 
+  // Redirect to callback URL or home page if accessing sign in page with token
   if (token && path === "/auth/signin") {
-    return NextResponse.redirect(new URL("/", request.url));
+    const callbackUrl = new URL(request.url).searchParams.get("callbackUrl");
+    return NextResponse.redirect(new URL(callbackUrl || "/dream", request.url));
   }
 
   return NextResponse.next();

@@ -2,7 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { UrlBuilder } from "@bytescale/sdk";
 import { UploadWidgetConfig } from "@bytescale/upload-widget";
 import { UploadDropzone } from "@bytescale/upload-widget-react";
@@ -42,6 +44,15 @@ const options: UploadWidgetConfig = {
 };
 
 export default function DreamPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status !== "loading" && !session) {
+      router.push("/auth/signin");
+    }
+  }, [session, status, router]);
+
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,6 +62,15 @@ export default function DreamPage() {
   const [photoName, setPhotoName] = useState<string | null>(null);
   const [theme, setTheme] = useState<themeType>("Modern");
   const [room, setRoom] = useState<roomType>("Living Room");
+
+  // If not authenticated, show loading state
+  if (status === "loading" || !session) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <LoadingDots color="white" style="large" />
+      </div>
+    );
+  }
 
   const UploadDropZone = () => (
     <UploadDropzone

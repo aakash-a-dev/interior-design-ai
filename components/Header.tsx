@@ -1,7 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import GoogleLogo from "./GoogleLogo";
 
 export default function Header() {
+  const { data: session } = useSession();
+  const pathname = usePathname();
+
   return (
     <header className="flex flex-col xs:flex-row justify-between items-center w-full mt-3 border-b pb-7 sm:px-4 px-2 border-gray-500 gap-2">
       <Link href="/" className="flex space-x-2">
@@ -16,7 +24,18 @@ export default function Header() {
          Interior AI
         </h1>
       </Link>
-
+      
+      {!session && pathname !== "/auth/signin" && (
+        <button
+          onClick={() => signIn(undefined, { callbackUrl: pathname === "/" ? "/dream" : pathname })}
+          className="flex items-center justify-center gap-2 rounded-lg border border-gray-600 bg-transparent px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 focus:ring-offset-[#17181C] transition-all duration-200 group"
+        >
+          <div className="w-5 h-5 opacity-80 group-hover:opacity-100">
+            <GoogleLogo />
+          </div>
+          <span>Sign in</span>
+        </button>
+      )}
     </header>
   );
 }
