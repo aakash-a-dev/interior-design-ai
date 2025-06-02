@@ -149,7 +149,7 @@ export default function HomePage() {
                   loading="eager"
                   onError={(e: any) => {
                     console.error("Error loading generated example image:", e);
-                    e.currentTarget.src = "/generatedpic.png";
+                    e.currentTarget.src = "/generated-pic.png";
                   }}
                 />
               </div>
@@ -162,7 +162,7 @@ export default function HomePage() {
                 <h3 className="mb-1 font-medium text-lg">Original Room</h3>
                 <Image
                   alt="Original photo of a room"
-                  src="/room-2/istockphoto-822550582-612x612.jpg"
+                  src="/room-2/original.jpg"
                   className="w-full object-cover h-96 rounded-2xl"
                   width={400}
                   height={400}
@@ -179,7 +179,7 @@ export default function HomePage() {
                   alt="Generated photo of a room"
                   width={400}
                   height={400}
-                  src="/room-2/istockphoto-822550582-612x612-new.jpg"
+                  src="/room-2/generated.jpg"
                   className="w-full object-cover h-96 rounded-2xl sm:mt-0 mt-2"
                   loading="eager"
                   onError={(e: any) => {

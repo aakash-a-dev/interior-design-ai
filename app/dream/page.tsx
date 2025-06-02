@@ -98,25 +98,35 @@ export default function DreamPage() {
   );
 
   async function generatePhoto(fileUrl: string) {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    setLoading(true);
-    const res = await fetch("/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ imageUrl: fileUrl, theme, room }),
-    });
+    try {
+      setError(null);
+      setLoading(true);
+      
+      const res = await fetch("/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ imageUrl: fileUrl, theme, room }),
+      });
 
-    let newPhoto = await res.json();
-    if (res.status !== 200) {
-      setError(newPhoto);
-    } else {
-      setRestoredImage(newPhoto[1]);
-    }
-    setTimeout(() => {
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to generate image');
+      }
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setRestoredImage(data.output);
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred");
+      console.error("Error generating photo:", err);
+    } finally {
       setLoading(false);
-    }, 1300);
+    }
   }
 
   return (
