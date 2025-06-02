@@ -21,8 +21,8 @@ module.exports = {
       },
     ],
   },
-  experimental: {
-    optimizeCss: true,
-    optimizeImages: true,
-  },
+  optimizeFonts: true,
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
 };
